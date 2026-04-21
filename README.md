@@ -37,3 +37,13 @@ logika keputusan (status_line dan filename) dari logika pengiriman response.
 Hal ini penting karena tanpa refactoring, kode pengiriman akan terduplikasi
 di setiap branch kondisi, melanggar prinsip DRY. Dengan refactoring,
 kode lebih bersih dan mudah ditambahkan kondisi baru di masa depan.
+
+## Commit 4 Reflection Notes
+
+Milestone ini mendemonstrasikan kelemahan fundamental single-threaded server.
+Ketika satu request membutuhkan waktu lama (disimulasikan dengan thread::sleep 10 detik),
+seluruh server diblokir dan tidak bisa melayani request lain sampai request pertama selesai.
+Ini terjadi karena loop `for stream in listener.incoming()` bersifat sequential —
+satu stream harus selesai dihandle sebelum stream berikutnya diproses.
+Dalam kasus nyata, ini bisa terjadi akibat query database lambat, I/O berat,
+atau komputasi kompleks yang membuat semua pengguna lain menunggu.

@@ -18,7 +18,7 @@ semua header HTTP yang dikirim browser seperti method (GET), path, dan metadata 
 
 ## Commit 2 Reflection Notes
 
-![Commit 2 screen capture](assets\images\commit2.png)
+![Commit 2 screen capture](assets/images/commit2.png)
 
 Pada milestone ini, server sekarang mengirimkan respon HTML ke browser.
 `fs::read_to_string("hello.html")` digunakan untuk membaca isi file HTML dari disk.
@@ -29,6 +29,7 @@ yang memberitahu browser ukuran body), blank line sebagai pemisah, lalu body HTM
 
 ## Commit 3 Reflection Notes
 
+![Commit 3 screen capture](assets/images/commit3.png)
 Milestone ini menambahkan kemampuan server untuk membedakan request.
 Request line pertama dari HTTP (misal "GET / HTTP/1.1") digunakan untuk
 menentukan respons yang tepat. Refactoring dilakukan dengan memisahkan

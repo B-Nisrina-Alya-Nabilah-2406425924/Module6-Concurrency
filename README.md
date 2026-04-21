@@ -16,6 +16,14 @@ HTTP request diakhiri dengan baris kosong, sehingga `.take_while(|line| !line.is
 digunakan untuk mengumpulkan semua header. Hasilnya adalah Vec<String> berisi
 semua header HTTP yang dikirim browser seperti method (GET), path, dan metadata lainnya.
 
-## Commit 2 Screen Capture
+## Commit 2 Reflection Notes
 
 ![Commit 2 screen capture](assets\images\commit2.png)
+
+Pada milestone ini, server sekarang mengirimkan respon HTML ke browser.
+`fs::read_to_string("hello.html")` digunakan untuk membaca isi file HTML dari disk.
+HTTP response memiliki format: status line, diikuti header (termasuk Content-Length
+yang memberitahu browser ukuran body), blank line sebagai pemisah, lalu body HTML.
+`Content-Length` penting agar browser tahu kapan response selesai diterima.
+`stream.write_all()` mengirimkan seluruh response sebagai bytes ke browser.
+

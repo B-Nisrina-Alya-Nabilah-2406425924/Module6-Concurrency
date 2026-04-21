@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello from Rust! 🦀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --rust: #CE422B;
+        --rust-dark: #A63520;
+        --rust-light: #F28B74;
+        --cream: #FFF8F0;
+        --yellow: #FFD166;
+        --teal: #06D6A0;
+        --navy: #1A1A2E;
+        --card: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Nunito', sans-serif;
+        background-color: var(--cream);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .blob {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.25;
+        animation: float 8s ease-in-out infinite;
+        z-index: 0;
+    }
+    .blob-1 { width: 400px; height: 400px; background: var(--rust-light); top: -100px; left: -100px; animation-delay: 0s; }
+    .blob-2 { width: 300px; height: 300px; background: var(--teal); bottom: -80px; right: -80px; animation-delay: 3s; }
+    .blob-3 { width: 250px; height: 250px; background: var(--yellow); top: 50%; left: 60%; animation-delay: 5s; }
+
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33%       { transform: translate(20px, -20px) scale(1.05); }
+        66%       { transform: translate(-15px, 15px) scale(0.95); }
+    }
+
+    .card {
+        position: relative;
+        z-index: 1;
+        background: var(--card);
+        border-radius: 32px;
+        padding: 56px 64px;
+        max-width: 560px;
+        width: 90%;
+        text-align: center;
+        box-shadow:
+        0 4px 0 4px var(--rust),
+        0 20px 60px rgba(0,0,0,0.12);
+        animation: pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes pop-in {
+        from { opacity: 0; transform: scale(0.7) translateY(40px); }
+        to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .crab {
+        font-size: 72px;
+        display: block;
+        margin-bottom: 16px;
+        animation: bounce 2s ease-in-out infinite;
+        filter: drop-shadow(0 8px 12px rgba(206,66,43,0.3));
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0) rotate(-5deg); }
+        50%       { transform: translateY(-14px) rotate(5deg); }
+    }
+
+    h1 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 3rem;
+        color: var(--rust);
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        animation: slide-up 0.5s 0.3s ease both;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+        color: #888;
+        margin-bottom: 32px;
+        animation: slide-up 0.5s 0.45s ease both;
+    }
+
+    @keyframes slide-up {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .pills {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+        animation: slide-up 0.5s 0.6s ease both;
+    }
+
+    .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--cream);
+        border: 2px solid #EEE;
+        border-radius: 999px;
+        padding: 6px 16px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--navy);
+        transition: transform 0.2s, border-color 0.2s;
+    }
+    .pill:hover { transform: translateY(-2px); border-color: var(--rust-light); }
+    .pill span { font-size: 1rem; }
+
+    .counter-box {
+        background: linear-gradient(135deg, var(--rust) 0%, var(--rust-dark) 100%);
+        border-radius: 20px;
+        padding: 24px 32px;
+        margin-bottom: 28px;
+        animation: slide-up 0.5s 0.75s ease both;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .counter-box::before {
+        content: '';
+        position: absolute;
+        top: -20px; right: -20px;
+        width: 80px; height: 80px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+    }
+
+    .counter-label {
+        color: rgba(255,255,255,0.75);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 6px;
+    }
+
+    .counter-number {
+        color: #FFF;
+        font-family: 'Fredoka One', cursive;
+        font-size: 2.8rem;
+        line-height: 1;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .fun-msg {
+        font-size: 0.95rem;
+        color: #666;
+        line-height: 1.7;
+        animation: slide-up 0.5s 0.9s ease both;
+    }
+
+    .fun-msg strong { color: var(--rust); }
+
+    .tag {
+        display: inline-block;
+        margin-top: 28px;
+        background: var(--yellow);
+        color: var(--navy);
+        font-weight: 700;
+        font-size: 0.8rem;
+        padding: 6px 20px;
+        border-radius: 999px;
+        letter-spacing: 1px;
+        animation: slide-up 0.5s 1.05s ease both;
+        box-shadow: 0 3px 0 rgba(0,0,0,0.15);
+    }
+
+    .dots {
+        position: fixed;
+        z-index: 0;
+        opacity: 0.06;
+    }
+    .dots-tl { top: 0; left: 0; width: 200px; height: 200px;
+        background: radial-gradient(circle, var(--navy) 1px, transparent 1px);
+        background-size: 20px 20px; }
+    .dots-br { bottom: 0; right: 0; width: 200px; height: 200px;
+        background: radial-gradient(circle, var(--navy) 1px, transparent 1px);
+        background-size: 20px 20px; }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="dots dots-tl"></div>
+    <div class="dots dots-br"></div>
+
+    <div class="card">
+    <span class="crab">🦀</span>
+
+    <h1>Hello, World!</h1>
+    <p class="subtitle">Hi from Rust, running from alya's machine.</p>
+
+    <div class="pills">
+        <div class="pill"><span>⚡</span> Rust-powered</div>
+        <div class="pill"><span>🔒</span> Concurrency</div>
+        <div class="pill"><span>🚀</span> Module 6</div>
+    </div>
+
+    <p class="fun-msg">
+        Server berjalan di <strong>127.0.0.1:7878</strong>.<br>
+        Dibuat dengan ❤️ dan <strong>Rust</strong> — no garbage collector needed!
+    </p>
+
+    <div class="tag">🎓 Advanced Programming · Fasilkom UI</div>
+    </div>
+</body>
+</html>

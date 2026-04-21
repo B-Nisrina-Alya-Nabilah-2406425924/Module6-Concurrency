@@ -47,3 +47,16 @@ Ini terjadi karena loop `for stream in listener.incoming()` bersifat sequential 
 satu stream harus selesai dihandle sebelum stream berikutnya diproses.
 Dalam kasus nyata, ini bisa terjadi akibat query database lambat, I/O berat,
 atau komputasi kompleks yang membuat semua pengguna lain menunggu.
+
+## Commit 5 Reflection Notes
+
+![Commit 5 screen capture](assets/images/commit5.png)
+ThreadPool adalah solusi untuk masalah di Milestone 4. Cara kerjanya:
+1. Saat pool dibuat, sejumlah Worker thread langsung di-spawn dan standby.
+2. Setiap Worker menunggu job dari shared channel (Arc<Mutex<Receiver>>).
+3. Ketika request masuk, `pool.execute()` mengirim closure (job) ke channel.
+4. Salah satu Worker yang idle mengambil job tersebut dan mengeksekusinya.
+Arc digunakan agar receiver bisa dishare ke banyak Worker (multiple ownership).
+Mutex memastikan hanya satu Worker yang bisa mengambil job di satu waktu (mutual exclusion).
+Dengan 4 thread di pool, server bisa menangani 4 request secara bersamaan,
+sehingga request /sleep tidak lagi memblokir request lainnya.

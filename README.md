@@ -27,3 +27,12 @@ yang memberitahu browser ukuran body), blank line sebagai pemisah, lalu body HTM
 `Content-Length` penting agar browser tahu kapan response selesai diterima.
 `stream.write_all()` mengirimkan seluruh response sebagai bytes ke browser.
 
+## Commit 3 Reflection Notes
+
+Milestone ini menambahkan kemampuan server untuk membedakan request.
+Request line pertama dari HTTP (misal "GET / HTTP/1.1") digunakan untuk
+menentukan respons yang tepat. Refactoring dilakukan dengan memisahkan
+logika keputusan (status_line dan filename) dari logika pengiriman response.
+Hal ini penting karena tanpa refactoring, kode pengiriman akan terduplikasi
+di setiap branch kondisi, melanggar prinsip DRY. Dengan refactoring,
+kode lebih bersih dan mudah ditambahkan kondisi baru di masa depan.
